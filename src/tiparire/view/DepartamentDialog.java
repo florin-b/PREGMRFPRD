@@ -99,8 +99,6 @@ public class DepartamentDialog extends JDialog implements DataListener {
 		listPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		listPanel.add(new JScrollPane(departamentList));
 
-		//listPanel.add(new JScrollPane(filialeList));
-
 		buttonsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		buttonsPanel.add(okButton);
 		buttonsPanel.add(cancelButton);

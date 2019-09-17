@@ -5,20 +5,17 @@ import java.util.List;
 import tiparire.enums.EnumTipTransport;
 import tiparire.model.Document;
 
+public class TransportFilter {
+	public List<Document> getFilteredData(EnumTipTransport tipTransport, List<Document> listDocumente) {
+		List<Document> tempList = new ArrayList<Document>();
 
+		for (Document doc : listDocumente) {
 
-public class TransportFilter
-{
-  public List<Document> getFilteredData(EnumTipTransport tipTransport, List<Document> listDocumente) {
-    List<Document> tempList = new ArrayList<Document>();
-    
-    for (Document doc : listDocumente) {
-      
-      if (doc.getTipTransport() != null && doc.getTipTransport() == tipTransport) {
-        tempList.add(doc);
-      }
-    } 
-    
-    return tempList;
-  }
+			if (doc.getTipTransport() != null && doc.getTipTransport() == tipTransport) {
+				tempList.add(doc);
+			}
+		}
+
+		return tempList;
+	}
 }

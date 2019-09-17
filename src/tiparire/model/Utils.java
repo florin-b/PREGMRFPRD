@@ -296,6 +296,26 @@ public class Utils {
 
 		}
 
+		if (userDep.equals("DP51")) {
+			departaments.add("Materiale grele");
+			departaments.add("Gips");
+			departaments.add("Chimice");
+			departaments.add("Parchet");
+		}
+
+		if (userDep.equals("DP55")) {
+			departaments.add("Lemnoase");
+			departaments.add("Feronerie");
+			departaments.add("Instalatii");
+			departaments.add("Hidroizolatii");
+
+		}
+
+		if (userDep.equals("DP58")) {
+			departaments.add("Gips");
+			departaments.add("Feronerie");
+		}
+
 		String[] depArray = departaments.toArray(new String[departaments.size()]);
 
 		return depArray;
