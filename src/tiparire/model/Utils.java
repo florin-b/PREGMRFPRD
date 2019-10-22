@@ -303,6 +303,24 @@ public class Utils {
 			departaments.add("Parchet");
 		}
 
+		if (userDep.equals("DP52")) {
+			departaments.add("Lemnoase");
+			departaments.add("Feronerie");
+			departaments.add("Instalatii");
+		}
+
+		if (userDep.equals("DP53")) {
+			departaments.add("Gips");
+			departaments.add("Hidroizolatii");
+
+		}
+
+		if (userDep.equals("DP54")) {
+			departaments.add("Materiale grele");
+			departaments.add("Hidroizolatii");
+
+		}
+
 		if (userDep.equals("DP55")) {
 			departaments.add("Lemnoase");
 			departaments.add("Feronerie");
@@ -311,14 +329,48 @@ public class Utils {
 
 		}
 
+		if (userDep.equals("DP56")) {
+			departaments.add("Lemnoase");
+			departaments.add("Feronerie");
+			departaments.add("Parchet");
+			departaments.add("Electrice");
+			departaments.add("Instalatii");
+
+		}
+
+		if (userDep.equals("DP57")) {
+			departaments.add("Materiale grele");
+			departaments.add("Gips");
+			departaments.add("Chimice");
+			departaments.add("Hidroizolatii");
+		}
+
 		if (userDep.equals("DP58")) {
 			departaments.add("Gips");
 			departaments.add("Feronerie");
 		}
 
+		addExtraDeparts(departaments);
+
 		String[] depArray = departaments.toArray(new String[departaments.size()]);
 
 		return depArray;
+	}
+
+	public static void addExtraDeparts(List<String> departaments) {
+		if (UserInfo.getInstance().getExtraDep() != null && !UserInfo.getInstance().getExtraDep().isEmpty()
+				&& !UserInfo.getInstance().getExtraDep().equals("null")) {
+			String[] arrayDeps = UserInfo.getInstance().getExtraDep().split(";");
+
+			departaments.clear();
+
+			for (String dep : arrayDeps) {
+				if (!dep.isEmpty())
+					departaments.add(dep);
+
+			}
+
+		}
 	}
 
 	public static String[] getFiliale() {

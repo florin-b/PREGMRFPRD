@@ -34,6 +34,7 @@ public class HandleJSONReceivedData {
 			userInfo.setUnitLog(getFiliala(userInfo.getFiliala()));
 			userInfo.setInitDepart(jsonObject.get("departament").toString());
 			userInfo.setDepozit(jsonObject.get("depozit").toString());
+			userInfo.setExtraDep(jsonObject.get("extraDep").toString());
 
 		} catch (JSONException e) {
 

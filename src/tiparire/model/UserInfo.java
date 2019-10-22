@@ -11,6 +11,7 @@ public class UserInfo {
 	private String logonStatus;
 	private String initDepart;
 	private String depozit;
+	private String extraDep;
 
 	private static UserInfo instance = new UserInfo();
 
@@ -92,6 +93,14 @@ public class UserInfo {
 
 	public void setDepozit(String depozit) {
 		this.depozit = depozit;
+	}
+
+	public String getExtraDep() {
+		return extraDep;
+	}
+
+	public void setExtraDep(String extraDep) {
+		this.extraDep = extraDep;
 	}
 	
 	
