@@ -81,6 +81,13 @@ public class HandleJSONReceivedData {
 							articolObject.getString("infoStatus") == null ? "" : articolObject.getString("infoStatus"));
 					unArticol.setTipTransport(EnumTipTransport.valueOf(articolObject.getString("tipTransport")));
 
+				
+					unArticol.setCantFractie(articolObject.getString("cantFractie"));
+					unArticol.setNrPaleti(articolObject.getString("nrPaleti"));
+					unArticol.setUmPaleti(articolObject.getString("umPaleti"));
+					
+					unArticol.setPalBuc(articolObject.getString("palBuc"));
+
 					objectsList.add(unArticol);
 
 				}

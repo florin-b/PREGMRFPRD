@@ -7,19 +7,17 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-
 import java.util.List;
 
 import javax.swing.BorderFactory;
-
 import javax.swing.JLabel;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import tiparire.filters.TipIncarcareFilter;
 import tiparire.model.Articol;
 import tiparire.model.Document;
 
@@ -35,11 +33,12 @@ public class HeaderDocPanel extends JPanel {
 	private JLabel tipTransport;
 
 	private JPanel headerPanel;
-	private JPanel artPanel;
+	private JPanel artPanel, artPanelPalet;
 	private JLabel rowNumLabel;
 
-	private JTable artTable;
+	private JTable artTable, artTablePalet;
 	private ArticolTableModel artTableModel;
+	private ArticolTableModelPalet artTablePaletModel;
 
 	private JLabel alertaEmitere;
 	private JLabel infoStatus;
@@ -49,10 +48,14 @@ public class HeaderDocPanel extends JPanel {
 		artPanel = new JPanel();
 		artPanel.setLayout(new BorderLayout());
 
+		artPanelPalet = new JPanel();
+		artPanelPalet.setLayout(new BorderLayout());
+
 		int space = 15;
 		Border spaceBorder = BorderFactory.createEmptyBorder(space, space, space, space);
 
 		artTableModel = new ArticolTableModel();
+		artTablePaletModel = new ArticolTableModelPalet();
 
 		artTable = new JTable(artTableModel);
 		artTable.setRowSelectionAllowed(false);
@@ -78,14 +81,56 @@ public class HeaderDocPanel extends JPanel {
 
 		artTable.setBorder(BorderFactory.createEtchedBorder());
 
+		JLabel labelFractii = new JLabel();
+		labelFractii.setText("Fractii de pregatit");
+		labelFractii.setFont(new Font("Arial", Font.PLAIN, 15));
+		labelFractii.setBorder(spaceBorder);
+
+		artPanel.add(labelFractii, BorderLayout.NORTH);
 		artPanel.add(new JScrollPane(artTable), BorderLayout.CENTER);
+
+		artTablePalet = new JTable(artTablePaletModel);
+		artTablePalet.setRowSelectionAllowed(false);
+
+		artTablePalet.getColumnModel().getColumn(0).setPreferredWidth(20);
+		artTablePalet.getColumnModel().getColumn(1).setPreferredWidth(300);
+		artTablePalet.getColumnModel().getColumn(2).setPreferredWidth(80);
+		artTablePalet.getColumnModel().getColumn(3).setPreferredWidth(75);
+		artTablePalet.getColumnModel().getColumn(4).setPreferredWidth(40);
+		artTablePalet.getColumnModel().getColumn(5).setPreferredWidth(50);
+		artTablePalet.getColumnModel().getColumn(6).setPreferredWidth(75);
+		artTablePalet.getColumnModel().getColumn(7).setPreferredWidth(130);
+
+		artTablePalet.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+		artTablePalet.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+		artTablePalet.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
+		artTablePalet.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+		artTablePalet.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+		artTablePalet.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+		artTablePalet.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
+
+		artTablePalet.setBorder(BorderFactory.createEtchedBorder());
+
+		JLabel labelPaleti = new JLabel();
+		labelPaleti.setText("Paleti intregi");
+		labelPaleti.setFont(new Font("Arial", Font.PLAIN, 15));
+		labelPaleti.setBorder(spaceBorder);
+
+		artPanelPalet.add(labelPaleti, BorderLayout.NORTH);
+		artPanelPalet.add(new JScrollPane(artTablePalet), BorderLayout.CENTER);
+		artPanelPalet.setPreferredSize(new Dimension(650, 210));
+
 		artPanel.setPreferredSize(new Dimension(650, 210));
 
 		artTable.setFont(new Font("Courier New", Font.PLAIN, 13));
-
 		artTable.setBackground(new Color(253, 252, 220));
 		artTable.setForeground(new Color(0, 100, 0));
 		artTable.setRowHeight(20);
+
+		artTablePalet.setFont(new Font("Courier New", Font.PLAIN, 13));
+		artTablePalet.setBackground(new Color(253, 252, 220));
+		artTablePalet.setForeground(new Color(0, 100, 0));
+		artTablePalet.setRowHeight(20);
 
 		headerPanel = new JPanel();
 
@@ -225,6 +270,7 @@ public class HeaderDocPanel extends JPanel {
 
 		add(headerContainer, BorderLayout.NORTH);
 		add(artPanel, BorderLayout.CENTER);
+		add(artPanelPalet, BorderLayout.SOUTH);
 
 	}
 
@@ -263,9 +309,17 @@ public class HeaderDocPanel extends JPanel {
 		rowNumLabel.setText(rownum);
 	}
 
-	public void setArticolData(List<Articol> articol) {
-		artTableModel.setData(articol);
+	public void setArticolData(List<Articol> articole) {
+
+		TipIncarcareFilter tipFilter = new TipIncarcareFilter();
+
+		List<Articol> articoleFractie = tipFilter.getArticoleFractie(articole);
+		List<Articol> articolePalet = tipFilter.getArticolePaleti(articole);
+
+		artTableModel.setData(articoleFractie);
 		artTableModel.fireTableDataChanged();
+		artTablePaletModel.setData(articolePalet);
+		artTablePaletModel.fireTableDataChanged();
 
 	}
 

@@ -2,7 +2,7 @@ package tiparire.enums;
 
 public enum EnumTipTransport {
 
-	TCLI("Transport client"), TRAP("Transport Arabesque"), TERT("Trasnport tert");
+	TCLI("Transport client"), TRAP("Transport Arabesque"), TERT("Trasnport tert") , TFRN("Trasnport furnizor");
 
 	EnumTipTransport(String tipTransport) {
 		this.tipTransport = tipTransport;

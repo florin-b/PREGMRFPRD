@@ -41,8 +41,8 @@ public class WebService {
 		envelope.setOutputSoapObject(request);
 		HttpTransportSE androidHttpTransport = new HttpTransportSE(ConnectionStrings.getInstance().getUrl(), 20000);
 		List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-		headerList.add(new HeaderProperty("Authorization", "Basic "
-				+ org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
+		headerList.add(new HeaderProperty("Authorization",
+				"Basic " + org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
 		androidHttpTransport.call(ConnectionStrings.getInstance().getNamespace() + "userLogon", envelope, headerList);
 		Object result = (Object) envelope.getResponse();
 		String response = result.toString();
@@ -64,14 +64,38 @@ public class WebService {
 		envelope.setOutputSoapObject(request);
 		HttpTransportSE androidHttpTransport = new HttpTransportSE(ConnectionStrings.getInstance().getUrl(), 40000);
 		List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-		headerList.add(new HeaderProperty("Authorization", "Basic "
-				+ org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
+		headerList.add(new HeaderProperty("Authorization",
+				"Basic " + org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
 		androidHttpTransport.call(ConnectionStrings.getInstance().getNamespace() + "getDocumenteTEST", envelope,
 				headerList);
 		Object result = (Object) envelope.getResponse();
 		String response = result.toString();
 
 		return response;
+
+	}
+
+	public String getDocumenteWS(EnumTipDocument tipDocument) throws IOException, XmlPullParserException {
+
+		SoapObject request = new SoapObject(ConnectionStrings.getInstance().getNamespace(), "getDocumenteWS");
+
+		request.addProperty("filiala", UserInfo.getInstance().getUnitLog());
+		request.addProperty("departament", Utils.getDepartCode(UserInfo.getInstance().getDepart()));
+		request.addProperty("tipDocument", tipDocument.toString());
+		request.addProperty("depozit", UserInfo.getInstance().getDepozit());
+
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		envelope.dotNet = true;
+		envelope.setOutputSoapObject(request);
+		HttpTransportSE androidHttpTransport = new HttpTransportSE(ConnectionStrings.getInstance().getUrl(), 240000);
+		List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+		headerList.add(new HeaderProperty("Authorization",
+				"Basic " + org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
+		androidHttpTransport.call(ConnectionStrings.getInstance().getNamespace() + "getDocumenteWS", envelope,
+				headerList);
+		Object result = envelope.getResponse();
+
+		return result.toString();
 
 	}
 
@@ -87,12 +111,12 @@ public class WebService {
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.dotNet = true;
 		envelope.setOutputSoapObject(request);
-		HttpTransportSE androidHttpTransport = new HttpTransportSE(ConnectionStrings.getInstance().getUrl(), 40000);
+		HttpTransportSE androidHttpTransport = new HttpTransportSE(ConnectionStrings.getInstance().getUrl(), 120000);
 		List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-		headerList.add(new HeaderProperty("Authorization", "Basic "
-				+ org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
-		androidHttpTransport
-				.call(ConnectionStrings.getInstance().getNamespace() + "getDocumente", envelope, headerList);
+		headerList.add(new HeaderProperty("Authorization",
+				"Basic " + org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
+		androidHttpTransport.call(ConnectionStrings.getInstance().getNamespace() + "getDocumente", envelope,
+				headerList);
 		Object result = envelope.getResponse();
 
 		return result.toString();
@@ -112,8 +136,8 @@ public class WebService {
 		envelope.setOutputSoapObject(request);
 		HttpTransportSE androidHttpTransport = new HttpTransportSE(ConnectionStrings.getInstance().getUrl(), 40000);
 		List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-		headerList.add(new HeaderProperty("Authorization", "Basic "
-				+ org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
+		headerList.add(new HeaderProperty("Authorization",
+				"Basic " + org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
 		androidHttpTransport.call(ConnectionStrings.getInstance().getNamespace() + "getDocumenteTiparite", envelope,
 				headerList);
 		Object result = (Object) envelope.getResponse();
@@ -123,8 +147,8 @@ public class WebService {
 
 	}
 
-	public String addDocumentTiparit(List<Document> documentTiparit) throws IOException, XmlPullParserException,
-			JSONException {
+	public String addDocumentTiparit(List<Document> documentTiparit)
+			throws IOException, XmlPullParserException, JSONException {
 		SoapObject request = new SoapObject(ConnectionStrings.getInstance().getNamespace(), "setPrintedDocuments");
 
 		JSONArray docsList = new JSONArray(documentTiparit);
@@ -142,8 +166,8 @@ public class WebService {
 
 		HttpTransportSE androidHttpTransport = new HttpTransportSE(ConnectionStrings.getInstance().getUrl(), 40000);
 		List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-		headerList.add(new HeaderProperty("Authorization", "Basic "
-				+ org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
+		headerList.add(new HeaderProperty("Authorization",
+				"Basic " + org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
 		androidHttpTransport.call(ConnectionStrings.getInstance().getNamespace() + "setPrintedDocuments", envelope,
 				headerList);
 		Object result = (Object) envelope.getResponse();
@@ -166,8 +190,8 @@ public class WebService {
 		envelope.setOutputSoapObject(request);
 		HttpTransportSE androidHttpTransport = new HttpTransportSE(ConnectionStrings.getInstance().getUrl(), 20000);
 		List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-		headerList.add(new HeaderProperty("Authorization", "Basic "
-				+ org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
+		headerList.add(new HeaderProperty("Authorization",
+				"Basic " + org.kobjects.base64.Base64.encode("bflorin:bflorin".getBytes())));
 		androidHttpTransport.call(ConnectionStrings.getInstance().getNamespace() + "setMarfaPregatita", envelope,
 				headerList);
 		Object result = (Object) envelope.getResponse();

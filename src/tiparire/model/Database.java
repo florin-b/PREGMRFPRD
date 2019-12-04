@@ -59,7 +59,7 @@ public class Database implements ProgressDialogListener {
 
 				try {
 					WebService service = new WebService();
-					docResult = service.getDocumente(tipDocument);
+					docResult = service.getDocumenteWS(tipDocument);
 
 				} catch (IOException e) {
 					e.printStackTrace();

@@ -38,6 +38,7 @@ import javax.print.event.PrintJobEvent;
 import org.json.JSONException;
 import org.xmlpull.v1.XmlPullParserException;
 
+import tiparire.filters.TipIncarcareFilter;
 import tiparire.model.Articol;
 import tiparire.model.Database;
 import tiparire.model.Document;
@@ -110,6 +111,11 @@ public class CreateDocument {
 					builder.append(addSpace("Transport:", 15));
 					builder.append(((Document) this.document.get(i)).getTipTransport());
 				}
+
+				builder.append(System.getProperty("line.separator"));
+				builder.append(System.getProperty("line.separator"));
+				builder.append("Fractii de pregatit");
+
 				builder.append(System.getProperty("line.separator"));
 				builder.append(System.getProperty("line.separator"));
 				builder.append("Nr.");
@@ -133,28 +139,35 @@ public class CreateDocument {
 						"---------------------------------------------------------------------------------------------------------------------------");
 				builder.append(System.getProperty("line.separator"));
 				StringBuilder lineBuilder = new StringBuilder();
-				for (int ii = 0; ii < Database.articol.size(); ii++) {
+
+				TipIncarcareFilter tipFilter = new TipIncarcareFilter();
+				List<Articol> articoleFractie = tipFilter.getArticoleFractie(Database.articol);
+				List<Articol> articolePalet = tipFilter.getArticolePaleti(Database.articol);
+
+				// for (int ii = 0; ii < Database.articol.size(); ii++) {
+				for (int ii = 0; ii < articoleFractie.size(); ii++) {
 					if (((Document) this.document.get(i)).getId()
-							.equals(((Articol) Database.articol.get(ii)).getDocumentId())) {
-						lineBuilder.append(String.valueOf(((Articol) Database.articol.get(ii)).getPozitie()) + ".");
+							.equals(((Articol) articoleFractie.get(ii)).getDocumentId())) {
+
+						lineBuilder.append(String.valueOf(((Articol) articoleFractie.get(ii)).getPozitie()) + ".");
 						lineBuilder.append(
-								addSpace(String.valueOf(((Articol) Database.articol.get(ii)).getPozitie()) + ".", 5));
-						lineBuilder.append(((Articol) Database.articol.get(ii)).getNume());
-						lineBuilder.append(addSpace(((Articol) Database.articol.get(ii)).getNume(), 45));
-						lineBuilder.append(((Articol) Database.articol.get(ii)).getCod());
-						lineBuilder.append(addSpace(((Articol) Database.articol.get(ii)).getCod(), 10));
-						lineBuilder.append(addSpace(((Articol) Database.articol.get(ii)).getCantitate(), 14));
-						lineBuilder.append(((Articol) Database.articol.get(ii)).getCantitate());
+								addSpace(String.valueOf(((Articol) articoleFractie.get(ii)).getPozitie()) + ".", 5));
+						lineBuilder.append(((Articol) articoleFractie.get(ii)).getNume());
+						lineBuilder.append(addSpace(((Articol) articoleFractie.get(ii)).getNume(), 45));
+						lineBuilder.append(((Articol) articoleFractie.get(ii)).getCod());
+						lineBuilder.append(addSpace(((Articol) articoleFractie.get(ii)).getCod(), 10));
+						lineBuilder.append(addSpace(((Articol) articoleFractie.get(ii)).getCantitate(), 14));
+						lineBuilder.append(((Articol) articoleFractie.get(ii)).getCantitate());
 						lineBuilder.append(addSpace("i", 2));
-						lineBuilder.append(((Articol) Database.articol.get(ii)).getUm());
-						lineBuilder.append(addSpace(((Articol) Database.articol.get(ii)).getUm(), 7));
-						lineBuilder.append(((Articol) Database.articol.get(ii)).getDepozit());
-						lineBuilder.append(addSpace(((Articol) Database.articol.get(ii)).getDepozit(), 10));
-						lineBuilder.append(addSpace(((Articol) Database.articol.get(ii)).getCantitateModificata(), 16));
-						lineBuilder.append(((Articol) Database.articol.get(ii)).getCantitateModificata());
+						lineBuilder.append(((Articol) articoleFractie.get(ii)).getUm());
+						lineBuilder.append(addSpace(((Articol) articoleFractie.get(ii)).getUm(), 7));
+						lineBuilder.append(((Articol) articoleFractie.get(ii)).getDepozit());
+						lineBuilder.append(addSpace(((Articol) articoleFractie.get(ii)).getDepozit(), 10));
+						lineBuilder.append(addSpace(((Articol) articoleFractie.get(ii)).getCantitateModificata(), 16));
+						lineBuilder.append(((Articol) articoleFractie.get(ii)).getCantitateModificata());
 						lineBuilder.append(addSpace("i", 3));
-						lineBuilder.append(((Articol) Database.articol.get(ii)).getModificare());
-						lineBuilder.append(addSpace(((Articol) Database.articol.get(ii)).getModificare(), 10));
+						lineBuilder.append(((Articol) articoleFractie.get(ii)).getModificare());
+						lineBuilder.append(addSpace(((Articol) articoleFractie.get(ii)).getModificare(), 10));
 						lineBuilder.append(System.getProperty("line.separator"));
 						builder.append(lineBuilder);
 						lineBuilder.setLength(0);
@@ -162,8 +175,69 @@ public class CreateDocument {
 				}
 				builder.append(
 						"---------------------------------------------------------------------------------------------------------------------------");
+
+				builder.append(System.getProperty("line.separator"));
+
 				builder.append(System.getProperty("line.separator"));
 				builder.append(System.getProperty("line.separator"));
+				builder.append("Paleti intregi");
+
+				builder.append(System.getProperty("line.separator"));
+				builder.append(System.getProperty("line.separator"));
+				builder.append("Nr.");
+				builder.append(addSpace("Nr.", 5));
+				builder.append("Nume");
+				builder.append(addSpace("Nume", 45));
+				builder.append("Cod");
+				builder.append(addSpace("Cod", 10));
+				builder.append("Cant. initiala");
+				builder.append(addSpace("Cant. initiala", 17));
+				builder.append("Um");
+				builder.append(addSpace("Um", 5));
+				builder.append("Depozit");
+				builder.append(addSpace("Depozit", 10));
+				builder.append("Cant. modificata");
+				builder.append(addSpace("Cant. modificata", 18));
+				builder.append("Modificari");
+				builder.append(addSpace("Modificari", 10));
+				builder.append(System.getProperty("line.separator"));
+				builder.append(
+						"---------------------------------------------------------------------------------------------------------------------------");
+				builder.append(System.getProperty("line.separator"));
+				lineBuilder = new StringBuilder();
+
+				for (int ii = 0; ii < articolePalet.size(); ii++) {
+					if (((Document) this.document.get(i)).getId()
+							.equals(((Articol) articolePalet.get(ii)).getDocumentId())) {
+
+						lineBuilder.append(String.valueOf(((Articol) articolePalet.get(ii)).getPozitie()) + ".");
+						lineBuilder.append(
+								addSpace(String.valueOf(((Articol) articolePalet.get(ii)).getPozitie()) + ".", 5));
+						lineBuilder.append(((Articol) articolePalet.get(ii)).getNume());
+						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getNume(), 45));
+						lineBuilder.append(((Articol) articolePalet.get(ii)).getCod());
+						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getCod(), 10));
+						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getCantitate(), 14));
+						lineBuilder.append(((Articol) articolePalet.get(ii)).getCantitate());
+						lineBuilder.append(addSpace("i", 2));
+						lineBuilder.append(((Articol) articolePalet.get(ii)).getUm());
+						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getUm(), 7));
+						lineBuilder.append(((Articol) articolePalet.get(ii)).getDepozit());
+						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getDepozit(), 10));
+						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getCantitateModificata(), 16));
+						lineBuilder.append(((Articol) articolePalet.get(ii)).getCantitateModificata());
+						lineBuilder.append(addSpace("i", 3));
+						lineBuilder.append(((Articol) articolePalet.get(ii)).getModificare());
+						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getModificare(), 10));
+						lineBuilder.append(System.getProperty("line.separator"));
+						builder.append(lineBuilder);
+						lineBuilder.setLength(0);
+					}
+				}
+
+				builder.append(System.getProperty("line.separator"));
+				builder.append(System.getProperty("line.separator"));
+
 			}
 		}
 		this.documentString = builder.toString();
@@ -233,7 +307,7 @@ public class CreateDocument {
 				try {
 					loadData();
 
-					int linesPerPage = 75;
+					int linesPerPage = 50;
 
 					int numBreaks = (textLines.size() - 1) / linesPerPage;
 					pageBreaks = new int[numBreaks];

@@ -22,6 +22,10 @@ public class Articol {
 	private String cantitateModificata;
 	private String infoStatus;
 	private EnumTipTransport tipTransport;
+	private String cantFractie;
+	private String nrPaleti;
+	private String umPaleti;
+	private String palBuc;
 
 	public Articol() {
 
@@ -29,7 +33,8 @@ public class Articol {
 
 	public Articol(String documentId, String client, String emitere, String cod, String nume, String cantitate,
 			String um, String pozitie, boolean isPregatit, boolean isTiparit, String tip, String depozit,
-			String modificare, String cantitateModificata, String infoStatus, EnumTipTransport tipTransport) {
+			String modificare, String cantitateModificata, String infoStatus, EnumTipTransport tipTransport,
+			String cantFractie, String nrPaleti, String umPaleti, String palBuc) {
 		super();
 		this.documentId = documentId;
 		this.client = client;
@@ -47,6 +52,11 @@ public class Articol {
 		this.cantitateModificata = cantitateModificata;
 		this.infoStatus = infoStatus;
 		this.tipTransport = tipTransport;
+		this.cantFractie = cantFractie;
+		this.nrPaleti = nrPaleti;
+		this.umPaleti = umPaleti;
+		this.palBuc = palBuc;
+
 	}
 
 	public String getDocumentId() {
@@ -191,6 +201,38 @@ public class Articol {
 
 	public void setTipTransport(EnumTipTransport tipTransport) {
 		this.tipTransport = tipTransport;
+	}
+
+	public String getCantFractie() {
+		return cantFractie;
+	}
+
+	public void setCantFractie(String cantFractie) {
+		this.cantFractie = cantFractie;
+	}
+
+	public String getNrPaleti() {
+		return nrPaleti;
+	}
+
+	public void setNrPaleti(String nrPaleti) {
+		this.nrPaleti = nrPaleti;
+	}
+
+	public String getUmPaleti() {
+		return umPaleti;
+	}
+
+	public void setUmPaleti(String umPaleti) {
+		this.umPaleti = umPaleti;
+	}
+
+	public String getPalBuc() {
+		return palBuc;
+	}
+
+	public void setPalBuc(String palBuc) {
+		this.palBuc = palBuc;
 	}
 
 	@Override

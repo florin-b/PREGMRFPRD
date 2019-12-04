@@ -7,11 +7,11 @@ import javax.swing.table.AbstractTableModel;
 import tiparire.model.Articol;
 
 @SuppressWarnings("serial")
-public class ArticolTableModel extends AbstractTableModel {
+public class ArticolTableModelPalet extends AbstractTableModel {
 
 	List<Articol> articol;
 
-	public ArticolTableModel() {
+	public ArticolTableModelPalet() {
 
 	}
 
