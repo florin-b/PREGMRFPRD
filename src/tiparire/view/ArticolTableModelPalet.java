@@ -16,7 +16,7 @@ public class ArticolTableModelPalet extends AbstractTableModel {
 	}
 
 	private String[] colNames = { "Nr.", "Nume articol", "Cod articol", "Cant. initiala", "Um", "Depozit",
-			"Cant. modificata", "Modificari" };
+			"Cant. modificata","Numar paleti", "Modificari" };
 
 	public int getColumnCount() {
 		return colNames.length;
@@ -56,6 +56,8 @@ public class ArticolTableModelPalet extends AbstractTableModel {
 		case 6:
 			return art.getCantitateModificata();
 		case 7:
+			return art.getNrPaleti();			
+		case 8:
 			return art.getModificare();
 
 		}

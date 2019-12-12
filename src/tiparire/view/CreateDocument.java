@@ -144,7 +144,7 @@ public class CreateDocument {
 				List<Articol> articoleFractie = tipFilter.getArticoleFractie(Database.articol);
 				List<Articol> articolePalet = tipFilter.getArticolePaleti(Database.articol);
 
-				// for (int ii = 0; ii < Database.articol.size(); ii++) {
+				
 				for (int ii = 0; ii < articoleFractie.size(); ii++) {
 					if (((Document) this.document.get(i)).getId()
 							.equals(((Articol) articoleFractie.get(ii)).getDocumentId())) {
@@ -198,11 +198,13 @@ public class CreateDocument {
 				builder.append(addSpace("Depozit", 10));
 				builder.append("Cant. modificata");
 				builder.append(addSpace("Cant. modificata", 18));
+				builder.append("Paleti");
+				builder.append(addSpace("Paleti", 7));				
 				builder.append("Modificari");
 				builder.append(addSpace("Modificari", 10));
 				builder.append(System.getProperty("line.separator"));
 				builder.append(
-						"---------------------------------------------------------------------------------------------------------------------------");
+						"--------------------------------------------------------------------------------------------------------------------------------");
 				builder.append(System.getProperty("line.separator"));
 				lineBuilder = new StringBuilder();
 
@@ -226,7 +228,10 @@ public class CreateDocument {
 						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getDepozit(), 10));
 						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getCantitateModificata(), 16));
 						lineBuilder.append(((Articol) articolePalet.get(ii)).getCantitateModificata());
-						lineBuilder.append(addSpace("i", 3));
+
+						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getNrPaleti(), 16));
+						lineBuilder.append(((Articol) articolePalet.get(ii)).getNrPaleti());
+						
 						lineBuilder.append(((Articol) articolePalet.get(ii)).getModificare());
 						lineBuilder.append(addSpace(((Articol) articolePalet.get(ii)).getModificare(), 10));
 						lineBuilder.append(System.getProperty("line.separator"));

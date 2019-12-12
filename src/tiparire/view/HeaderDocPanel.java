@@ -99,7 +99,8 @@ public class HeaderDocPanel extends JPanel {
 		artTablePalet.getColumnModel().getColumn(4).setPreferredWidth(40);
 		artTablePalet.getColumnModel().getColumn(5).setPreferredWidth(50);
 		artTablePalet.getColumnModel().getColumn(6).setPreferredWidth(75);
-		artTablePalet.getColumnModel().getColumn(7).setPreferredWidth(130);
+		artTablePalet.getColumnModel().getColumn(7).setPreferredWidth(50);
+		artTablePalet.getColumnModel().getColumn(8).setPreferredWidth(130);
 
 		artTablePalet.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 		artTablePalet.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
@@ -108,6 +109,7 @@ public class HeaderDocPanel extends JPanel {
 		artTablePalet.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 		artTablePalet.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
 		artTablePalet.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
+		artTablePalet.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
 
 		artTablePalet.setBorder(BorderFactory.createEtchedBorder());
 
