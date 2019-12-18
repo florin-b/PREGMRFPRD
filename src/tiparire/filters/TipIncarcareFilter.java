@@ -15,8 +15,13 @@ public class TipIncarcareFilter {
 		List<Articol> articoleFractie = new ArrayList<>();
 
 		for (Articol articol : listArticole) {
-			if (Double.parseDouble(articol.getNrPaleti()) == 0)
+			if (Double.parseDouble(articol.getCantFractie()) > 0) {
+
+				articol.setCantitate(articol.getCantFractie());
+				articol.setCantitateModificata(articol.getCantitate());
 				articoleFractie.add(articol);
+			}
+
 		}
 
 		return articoleFractie;
@@ -26,7 +31,7 @@ public class TipIncarcareFilter {
 		List<Articol> articolePaleti = new ArrayList<>();
 
 		for (Articol articol : listArticole) {
-			if (Double.parseDouble(articol.getNrPaleti()) != 0) {
+			if (Double.parseDouble(articol.getNrPaleti()) > 0) {
 				articol.setCantitate(formatter
 						.format(Double.parseDouble(articol.getNrPaleti()) * Double.parseDouble(articol.getPalBuc())));
 				articol.setCantitateModificata(articol.getCantitate());
